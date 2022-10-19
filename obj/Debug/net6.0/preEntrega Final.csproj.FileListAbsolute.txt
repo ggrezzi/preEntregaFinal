@@ -1,0 +1,22 @@
+C:\Gabriel\preEntrega Final\obj\Debug\net6.0\preEntrega Final.csproj.AssemblyReference.cache
+C:\Gabriel\preEntrega Final\obj\Debug\net6.0\preEntrega Final.GeneratedMSBuildEditorConfig.editorconfig
+C:\Gabriel\preEntrega Final\obj\Debug\net6.0\preEntrega Final.AssemblyInfoInputs.cache
+C:\Gabriel\preEntrega Final\obj\Debug\net6.0\preEntrega Final.AssemblyInfo.cs
+C:\Gabriel\preEntrega Final\obj\Debug\net6.0\preEntrega Final.csproj.CoreCompileInputs.cache
+C:\Gabriel\preEntrega Final\bin\Debug\net6.0\preEntrega Final.exe
+C:\Gabriel\preEntrega Final\bin\Debug\net6.0\preEntrega Final.deps.json
+C:\Gabriel\preEntrega Final\bin\Debug\net6.0\preEntrega Final.runtimeconfig.json
+C:\Gabriel\preEntrega Final\bin\Debug\net6.0\preEntrega Final.dll
+C:\Gabriel\preEntrega Final\bin\Debug\net6.0\preEntrega Final.pdb
+C:\Gabriel\preEntrega Final\bin\Debug\net6.0\System.Data.SqlClient.dll
+C:\Gabriel\preEntrega Final\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+C:\Gabriel\preEntrega Final\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+C:\Gabriel\preEntrega Final\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+C:\Gabriel\preEntrega Final\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Gabriel\preEntrega Final\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Gabriel\preEntrega Final\obj\Debug\net6.0\preEntrega Final.csproj.CopyComplete
+C:\Gabriel\preEntrega Final\obj\Debug\net6.0\preEntrega Final.dll
+C:\Gabriel\preEntrega Final\obj\Debug\net6.0\refint\preEntrega Final.dll
+C:\Gabriel\preEntrega Final\obj\Debug\net6.0\preEntrega Final.pdb
+C:\Gabriel\preEntrega Final\obj\Debug\net6.0\preEntrega Final.genruntimeconfig.cache
+C:\Gabriel\preEntrega Final\obj\Debug\net6.0\ref\preEntrega Final.dll
