@@ -96,6 +96,36 @@ namespace preEntrega_Final
                 return usuario;
             }
         }
+
+        public Usuario TraerUsuario(int idUsuario)
+        //Metodo al que se le ingresa un UserNAme y devuelve el objeto Usuario correspondiente (A)
+        {
+            var usuario = new Usuario();
+            string connectionString = "Server=W0447;Database=Master; Trusted_connection=True;";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var comando = new SqlCommand("Select * from Usuario where id ='" + idUsuario + "'", connection);
+                using (SqlDataReader dr = comando.ExecuteReader())
+                {
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            usuario = new Usuario(dr.GetInt64(0), dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5));
+                        }
+                    }
+                    else
+                    {
+                        usuario = new Usuario();
+                    }
+                }
+                connection.Close();
+                return usuario;
+            }
+        }
+
+
         public string GetPassword()
             //MEtodo que devuelve el password del usuario
         {

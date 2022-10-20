@@ -89,7 +89,7 @@ namespace preEntrega_Final
         }
 
 
-        static public List<Producto> TraerProducto(int idUsuario)
+        public static List<Producto> TraerProducto(int idUsuario)
             //Metodo que recibe un UserID y retorna una lista de productos asignados a ese usuario
         {
             List<Producto> productos = new List<Producto> { };
@@ -120,9 +120,49 @@ namespace preEntrega_Final
         }
 
 
+     public static void TraerProductoByUsuario()
+    {
 
+        var listaProducto = new List<Producto>();
 
+        Console.WriteLine("Ingrese el ID del USUARIO");
+        int usuarioId = int.Parse(Console.ReadLine());
+
+        SqlConnectionStringBuilder conecctionbuilder = new SqlConnectionStringBuilder();
+        conecctionbuilder.DataSource = "W0447";
+        conecctionbuilder.InitialCatalog = "master";
+        conecctionbuilder.IntegratedSecurity = true;
+        var cs = conecctionbuilder.ConnectionString;
+
+        using (SqlConnection connection = new SqlConnection(cs))
+        {
+            using (SqlCommand conect = new SqlCommand("Select * from Poducto where IdUsuario = @usuarioId", connection))
+            {
+                connection.Open();
+
+                SqlCommand cmd = connection.CreateCommand();
+
+                cmd.CommandText = "Select  * from Producto where IdUsuario = @usuarioId";
+                cmd.Parameters.Add(new SqlParameter("@usuarioId", usuarioId));
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Producto producto = new Producto();
+                        Console.WriteLine(reader.GetValue(0).ToString());
+                        Console.WriteLine(reader.GetValue(1).ToString());
+                        Console.WriteLine(reader.GetValue(2).ToString());
+                        Console.WriteLine(reader.GetValue(3).ToString());
+                        Console.WriteLine(reader.GetValue(4).ToString());
+
+                }
+
+   
+            }
+        }
     }
+
+}
 }
 
 

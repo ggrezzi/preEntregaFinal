@@ -14,6 +14,7 @@ string nombreUsuario = string.Empty;
 List<Venta> ventas = new List<Venta>();
 List<Producto> productos = new List<Producto>();
 
+
 //Menu inciial de pruebas
 Console.WriteLine("A - Traer usuario - Ingresa Nombre de usuario y debe retornar el Objeto Usuario");
 Console.WriteLine("B - Traer Producto - Ingresa un User ID y retorna ina lista de productos cargados por ese usuario");
@@ -27,7 +28,7 @@ opcion = Console.ReadLine().ToUpper();
 
 
 while (opcion != "F")
-{ 
+{
     switch (opcion)
     {
         case "A":
@@ -37,7 +38,7 @@ while (opcion != "F")
             nombreUsuario = Console.ReadLine();
             usuario = usuario.TraerUsuario(nombreUsuario);
             Console.WriteLine("ID del usuario= " + usuario.GetId().ToString());
-            Console.WriteLine("Nombre de Usuario= "+usuario.GetName());
+            Console.WriteLine("Nombre de Usuario= " + usuario.GetName());
             Console.WriteLine("Apellido del usuario= " + usuario.GetApellido());
             Console.WriteLine("UserName del usuario= " + usuario.GetNombreUsuario());
             Console.WriteLine("Password del usuario= " + usuario.GetPassword());
@@ -50,10 +51,10 @@ while (opcion != "F")
             Console.Write("Ingrese el User ID del que se desea traer los productos:");
             idUsuario = Convert.ToInt32(Console.ReadLine());
             productos = Producto.TraerProducto(idUsuario);
-            Console.WriteLine("Lista de productos retornada para le Id " +idUsuario);
+            Console.WriteLine("Lista de productos retornada para le Id " + idUsuario);
             foreach (Producto p in productos)
             {
-                Console.Write("Descipcion: ");
+                Console.Write("Descripcion: ");
                 Console.WriteLine(p.GetDescripciones());
             }
             break;
@@ -62,11 +63,12 @@ while (opcion != "F")
             //ID de usuario y me retorna todos los productos vendidos de ese usuario
             Console.Write("Ingrese el User ID del que se desea traer los productos Vendidos:");
             idUsuario = Convert.ToInt32(Console.ReadLine());
-            productos = ProductoVendido.TraerProductosVendidos(idUsuario);
+            var prod = new ProductoVendido();
+            productos = prod.TraerProductosVendidos(idUsuario);
             Console.WriteLine("Lista de productos retornada para le Id " + idUsuario);
             foreach (Producto p in productos)
             {
-                Console.Write("Descipcion: ");
+                Console.Write("Descripcion: ");
                 Console.WriteLine(p.GetDescripciones());
             }
             break;
@@ -79,11 +81,15 @@ while (opcion != "F")
             Console.WriteLine("Lista de productos retornada para le Id " + idUsuario);
             foreach (Venta p in ventas)
             {
-                Console.Write("Descipcion: ");
+                Console.Write("Descripcion: ");
                 Console.WriteLine(p.GetDescripciones());
                 Console.Write("Comentarios: ");
                 Console.WriteLine(p.GetComentarios());
-
+                foreach (ProductoVendido pvendido in p.GetListaProductosVendidos())
+                {
+                    Console.WriteLine("Stock: " + pvendido.GetCantidadVendida());
+                    Console.WriteLine("Descripcion: " + pvendido.GetDescipcion());
+                }
             }
             break;
 
@@ -95,17 +101,18 @@ while (opcion != "F")
             nombreUsuario = Console.ReadLine();
             Console.Write("Ingrese su password:");
             string password = Console.ReadLine();
-            usuario = usuario.InicioDeSesion(nombreUsuario,password);
-            if (usuario.GetId()==0)
+            usuario = usuario.InicioDeSesion(nombreUsuario, password);
+            if (usuario.GetId() == 0)
             {
                 Console.WriteLine("Usuario no encontrado");
             }
             else
             {
+
                 Console.WriteLine("Nombre del usuario: " + usuario.GetName());
-                Console.WriteLine("Apellido del usuario: "+usuario.GetApellido());
-                Console.WriteLine("ID del usuario:"+usuario.GetId().ToString());
-                Console.WriteLine("MAil del usuario:"+usuario.GetEmail());
+                Console.WriteLine("Apellido del usuario: " + usuario.GetApellido());
+                Console.WriteLine("ID del usuario:" + usuario.GetId().ToString());
+                Console.WriteLine("MAil del usuario:" + usuario.GetEmail());
             }
             break;
         default:
@@ -128,20 +135,3 @@ while (opcion != "F")
     opcion = Console.ReadLine().ToUpper();
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

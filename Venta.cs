@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace preEntrega_Final
 {
-    public class Venta:Producto
+    public class Venta
 
     //Clase Venta - Hija de Producto.
     //Basicamente un producto que tambien tiene info de su propia venta
@@ -17,14 +18,20 @@ namespace preEntrega_Final
         protected string _comentario;
         protected int _idVenta;
         protected int _idUsuario;
-        public Venta( int idUsuario, int idVenta, string comentario, string codigo, string descripcion, double precioDeVenta, double precioDeCompra, int stock, int categoria) : base(codigo, descripcion, precioDeVenta, precioDeCompra, stock, categoria)
-            //Constructor con toda la info
+        protected List<ProductoVendido> _listaProductosVendidos = new List<ProductoVendido>();
+
+
+        public Venta(int idUsuario, int idVenta, string comentario, List<ProductoVendido> listaProductosVendidos )
+        //Constructor con toda la info
         {
+
+            // int categoria
             _idUsuario = idUsuario;
             _comentario = comentario;
             _idVenta = idVenta;
+            _listaProductosVendidos = listaProductosVendidos;
+            //_listaProductosVendidos = ProductoVendido.TraerProductosVendidosPorIdVenta(idVenta);
         }
-
 
         static public List<Venta> TraerVentas(int userId)
             //Metodo al que se le ingresa un UserID y retorna la lista de ventas correspondiente
@@ -36,22 +43,21 @@ namespace preEntrega_Final
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var comando = new SqlCommand("SELECT Venta.IdUsuario, Venta.Id, Venta.Comentarios, Producto.Id, producto.Descripciones, Producto.PrecioVenta, Producto.Costo, Producto.Stock, Producto.IdUsuario FROM ProductoVendido " +
-                    "INNER JOIN Venta ON ProductoVendido.IdVenta = Venta.Id " +
-                    "INNER JOIN Producto ON ProductoVendido.IdProducto = Producto.Id " +
-                    "WHERE producto.IdUsuario = " + userId, connection);
+                var comando = new SqlCommand("SELECT * from Venta Where IdUsuario = " + userId, connection);
                 using (SqlDataReader dr = comando.ExecuteReader())
                 {
                     if (dr.HasRows)
                     {
                         while (dr.Read())
                         {
-                            Venta p = new Venta((int)Convert.ToInt64(dr.GetValue(0)),(int)Convert.ToInt64(dr.GetValue(1)), dr.GetString(2),dr.GetInt64(3).ToString(), dr.GetString(4), Convert.ToDouble(dr.GetDecimal(5)), Convert.ToDouble(dr.GetDecimal(6)), Convert.ToInt32(dr.GetValue(7)), Convert.ToInt32(dr.GetValue(8)));
+                            ProductoVendido temporaryProd = new ProductoVendido();
+                            Venta p = new Venta((int)Convert.ToInt64(dr.GetValue(2)),(int)Convert.ToInt64(dr.GetValue(0)), dr.GetString(1), temporaryProd.TraerProductosVendidosPorIdVenta((int)Convert.ToInt64(dr.GetValue(0))));
                             traerVentas.Add(p);
                         }
                     }
                 }
                 connection.Close();
+
             }
             return traerVentas;
         }
@@ -60,6 +66,18 @@ namespace preEntrega_Final
             //Metodo que retorna los comentarios de la venta
         {
             return _comentario;
+        }
+
+
+        public  List<ProductoVendido> GetListaProductosVendidos()
+        //Metodo que retorna los comentarios de la venta
+        {
+            return _listaProductosVendidos;
+        }
+        public string GetDescripciones()
+        {
+            return _comentario;
+
         }
     }
 }
